@@ -17,12 +17,10 @@
 	</div> <!--form_div-->
 
 	<div class="output">
-		<p ng-show='doing_searching'>Searching Instagram for photos tagged with "{{tag}}".</p>
-		<p ng-show='search_success'>We found {{results.length}} results for "{{tag}}".</p>
-		<p ng-show='search_fail'>There are some errors when processing your request.</p>
+		<p>{{message}}</p>
 
 		<div class='image' ng-repeat='result in results'>
-		    <img ng-src={{result.images.low_resolution.url}}>
+		    <a href={{result.link}}><img ng-src={{result.images.low_resolution.url}}></a>
 	    </div> <!--image-->
 
 
