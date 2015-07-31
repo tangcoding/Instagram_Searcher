@@ -20,7 +20,7 @@
 
 	<div class="output">
 		<p>{{message}}</p>
-		<div class="inf_scroll" infinite-scroll='add_more()' infinite-scroll-disabled='busy' infinite-scroll-distance='1'>
+		<div class="inf_scroll" infinite-scroll='add_more()' infinite-scroll-disabled='inf_scrl_disabled' infinite-scroll-distance='1'>
 			<div class='image' ng-repeat='result in results'>
 		        <a href={{result.link}}><img ng-src={{result.images.low_resolution.url}}></a>
 	        </div> <!--image-->

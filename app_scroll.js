@@ -1,10 +1,9 @@
 var app = angular.module('app',['infinite-scroll']);
 
 
-app.value('busy', false);
-
 app.controller('search_controller',function($scope, $http, $timeout){
 
+  $scope.inf_scrl_disabled = false;
 
 	$scope.submit = function(){
 
@@ -42,11 +41,13 @@ app.controller('search_controller',function($scope, $http, $timeout){
 
     if($scope.tag){
 
-        busy = true;
+      console.log($scope.inf_scrl_disabled);
+
+        $scope.inf_scrl_disabled = true;
 
         var url = $scope.next_url;
         var request = {
-            count: 9,
+            count: 3,
             callback: 'JSON_CALLBACK',
             client_id: '7801b4ae0486431e9e81f5301fdcb006'
           };
@@ -57,17 +58,20 @@ app.controller('search_controller',function($scope, $http, $timeout){
         .error(error);
 
         function success(data, status, headers, config){
-          $scope.add_results = data.data;
-          for (var i = 0; i < $scope.add_results.length; i++) {
-              $scope.results.push($scope.add_results[i]);
+          $scope.new_results = data.data;
+          for (var i = 0; i < $scope.new_results.length; i++) {
+              $scope.results.push($scope.new_results[i]);
           }
           $scope.next_url = data.pagination.next_url;
-          busy = false;
+
+          $timeout(
+            function(){$scope.inf_scrl_disabled = false;},
+            1000);
+          
         }
        
         function error(error, status, headers, config){
             $scope.message = 'There are some errors when processing your request.';
-            busy = false;
         } 
 
     }
