@@ -24,11 +24,11 @@ app.controller('search_controller',function($scope, $http, $timeout){
       $timeout(
         function(){
           $scope.message = 'Photos for "' + $scope.tag + '".';
+          $scope.results = data.data;
+          $scope.next_url = data.pagination.next_url;
         },
         1000);
 
-      $scope.results = data.data;
-      $scope.next_url = data.pagination.next_url;
     }
        
     function error(error, status, headers, config){
@@ -40,8 +40,6 @@ app.controller('search_controller',function($scope, $http, $timeout){
   $scope.add_more = function(){
 
     if($scope.tag){
-
-      console.log($scope.inf_scrl_disabled);
 
         $scope.inf_scrl_disabled = true;
 
